@@ -83,7 +83,6 @@ module.exports = {
     // console.log('serviceAccount', serviceAccount);
     // console.log('admin.apps?.length', admin.apps?.length);
     if (data !== null && data.serviceAccount) {
-      console.log("hit init");
       if (admin.apps?.length > 1) {
         Promise.all(admin.apps.map((app) => app.delete())).then(() => {
           admin.initializeApp({
