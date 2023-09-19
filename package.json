@@ -36,8 +36,5 @@
     "npm": ">=6.0.0"
   },
   "license": "MIT",
-  "packageManager": "yarn@3.6.1",
-  "dependencies": {
-    "firebase-admin": "^11.10.1"
-  }
+  "packageManager": "yarn@3.6.1"
 }
