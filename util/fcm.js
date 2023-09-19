@@ -23,7 +23,7 @@ module.exports = {
     }
 
     if (entry.payload) {
-      payload = { ...payload, data: entry.payload };
+      payload = { ...payload, data: JSON.parse(entry.payload) };
     }
 
     let options = {
