@@ -71,7 +71,6 @@ module.exports = ({ strapi }) => ({
   },
 
   async create(params = {}) {
-    console.log("hit create");
     const model = strapi.contentTypes[uid];
     const setupEntry = async (entry) => {
       if (hasDraftAndPublish(model)) {
@@ -87,14 +86,18 @@ module.exports = ({ strapi }) => ({
     const { data } = params;
     if (Array.isArray(data)) {
       if (data.length > 0) {
-        const entries = await Promise.all(data.map((d) => setupEntry(d)));
-        return strapi.db.query(uid).createMany({ data: entries });
+        const result = strapi.db.query(uid).createMany({ data: entries });
+        const entries = await Promise.all(
+          data.map((d, i) => setupEntry({ id: result.ids[i], ...d }))
+        );
+        return result;
       } else {
         throw Error("Data array is empty!");
       }
     } else {
-      const entry = await setupEntry(data);
-      return strapi.entityService.create(uid, { data: entry });
+      const result = strapi.entityService.create(uid, { data: entry });
+      const entry = await setupEntry({ id: result.id, ...data });
+      return result;
     }
   },
 
