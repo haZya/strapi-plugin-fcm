@@ -23,7 +23,10 @@ module.exports = {
     }
 
     if (entry.payload) {
-      payload = { ...payload, data: entry.payload };
+      payload = {
+        ...payload,
+        data: { notificationId: entry.id, ...entry.payload },
+      };
     }
 
     let options = {
