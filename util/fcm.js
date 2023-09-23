@@ -1,7 +1,6 @@
 "use strict";
 
 const admin = require("firebase-admin");
-const { v4: uuidv4 } = require("uuid");
 
 module.exports = {
   /*
@@ -26,7 +25,7 @@ module.exports = {
     if (entry.payload) {
       payload = {
         ...payload,
-        data: { uuid: uuidv4(), ...entry.payload },
+        data: entry.payload,
       };
     }
 
@@ -37,7 +36,6 @@ module.exports = {
     // console.log('payload', payload, 'target is ', entry.target);
     let res = null;
     if (entry.targetType === "tokens") {
-      console.log("payload", payload);
       const tokens = entry.target.split(",");
       if (tokens.length > 1) {
         res = await admin
