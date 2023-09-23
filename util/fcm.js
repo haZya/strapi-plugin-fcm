@@ -1,6 +1,7 @@
 "use strict";
 
 const admin = require("firebase-admin");
+const { v4: uuidv4 } = require("uuid");
 
 module.exports = {
   /*
@@ -25,7 +26,7 @@ module.exports = {
     if (entry.payload) {
       payload = {
         ...payload,
-        data: { notificationId: entry.id, ...entry.payload },
+        data: { uuid: uuidv4(), ...entry.payload },
       };
     }
 

@@ -86,23 +86,18 @@ module.exports = ({ strapi }) => ({
     const { data } = params;
     if (Array.isArray(data)) {
       if (data.length > 0) {
-        const result = strapi.db.query(uid).createMany({ data: entries });
-        const entries = await Promise.all(
-          data.map((d, i) => setupEntry({ id: result.ids[i], ...d }))
-        );
-        return result;
+        const entries = await Promise.all(data.map((d) => setupEntry(d)));
+        return strapi.db.query(uid).createMany({ data: entries });
       } else {
         throw Error("Data array is empty!");
       }
     } else {
-      const result = strapi.entityService.create(uid, { data: entry });
-      const entry = await setupEntry({ id: result.id, ...data });
-      return result;
+      const entry = await setupEntry(data);
+      return strapi.entityService.create(uid, { data: entry });
     }
   },
 
   async update(entityId, params = {}) {
-    console.log("hit update");
     const { data } = params;
     if (Object.keys(data.response || {}).length === 0) {
       const fcmResponse = await fcmUtil.send(data);
