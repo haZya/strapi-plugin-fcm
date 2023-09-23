@@ -25,7 +25,7 @@ module.exports = {
     if (entry.payload) {
       payload = {
         ...payload,
-        data: { notificationId: entry.id?.toString(), ...entry.payload },
+        data: { ...entry.payload },
       };
     }
 
