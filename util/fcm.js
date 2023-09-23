@@ -37,6 +37,7 @@ module.exports = {
     // console.log('payload', payload, 'target is ', entry.target);
     let res = null;
     if (entry.targetType === "tokens") {
+      console.log("payload", payload);
       const tokens = entry.target.split(",");
       if (tokens.length > 1) {
         res = await admin
