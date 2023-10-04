@@ -30,6 +30,7 @@ module.exports = {
     }
 
     let options = {
+      contentAvailable: true,
       mutableContent: true,
     };
 
