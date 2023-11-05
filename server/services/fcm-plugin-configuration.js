@@ -13,11 +13,9 @@ const {
   convertPagedToStartLimit,
   shouldCount,
   transformPaginationResponse,
-} = require("@strapi/strapi/dist/core-api/service/pagination");
+} = require("@strapi/strapi/lib/core-api/service/pagination");
 
-const {
-  getFetchParams,
-} = require("@strapi/strapi/dist/core-api/service/get-fetch-params");
+const { getFetchParams } = require("@strapi/strapi/lib/core-api/service");
 
 const {
   hasDraftAndPublish,
